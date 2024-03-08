@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    table, th, td {
+      text-align: center;
+      border: 1px solid black;
+    }
+  </style>
+  <title>Work Tracker!</title>
+</head>
+<body>
+  <header>
+    <h1>WorkTracker!</h1>
+
+    <form action="" style="display: flex; justify-content: space-between;" id="formulario">
+      <label for="date">Ingrese el día: 
+        <input type="date" name="date" id="date">
+      </label>
+
+      <label for="area">Seleccione el área: 
+        <select name="area" id="area">
+          <option value="">Selecciona una opción</option>
+          <option value="Hombres">Hombres</option>
+          <option value="Mujeres">Mujeres</option>
+          <option value="Enfermería">Enfermería</option>
+          <option value="Platanera">Platanera</option>
+        </select>
+      </label>
+      
+
+      <label for="motivo">Motivo del turno: 
+        <input type="text" name="motivo" id="motivo">
+      </label>
+
+      <div>
+        <button type="button" onclick="agregarDatos()">Agregar</button>
+        <button type="reset">Borrar</button>
+      </div>
+    </form>
+  </header>
+  <br>
+  <br>
+  <main>
+    <table style="width: 100%;">
+      <thead>
+        <tr>
+          <th>No.</th>
+          <th>Fecha</th>
+          <th>Área</th>
+          <th>Motivo</th>
+        </tr>
+      </thead>
+      <tbody id="cuerpoTabla">
+
+      </tbody>
+    </table>
+  </main>
+  <script>
+    var numero = 0;
+
+    function agregarDatos() {
+      // Capturando los valores ingresados en el formulario.
+
+      numero++;
+      var fecha = document.getElementById("date").value;
+      var area = document.getElementById("area").value;
+      var motivo = document.getElementById("motivo").value;
+
+      // Crear una nueva fila en la tabla
+
+      var tabla = document.getElementById("cuerpoTabla");
+      var fila = tabla.insertRow();
+
+      // Insertar celdas con los datos capturados en el formulario
+      
+      var celdaNumero = fila.insertCell(0);
+      var celdaFecha = fila.insertCell(1);
+      var celdaArea = fila.insertCell(2);
+      var celdaMotivo = fila.insertCell(3);
+
+    // Asignar los valores capturados a las celdas de la fila
+    celdaNumero.innerHTML = numero;
+    celdaFecha.innerHTML = fecha;
+    celdaArea.innerHTML = area;
+    celdaMotivo.innerHTML = motivo;
+
+    // Limpiar campos del formulario 
+
+    document.getElementById("formulario").reset();
+    }
+  </script>
+</body>
+</html>
