@@ -4,6 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
+    body {
+      font-family: sans-serif;
+    }
+
+    table {
+      width: 100%;
+    }
+
     table, th, td {
       text-align: center;
       border: 1px solid black;
@@ -15,81 +23,105 @@
   <header>
     <h1>WorkTracker!</h1>
 
-    <form action="" style="display: flex; justify-content: space-between;" id="formulario">
-      <label for="date">Ingrese el día: 
+    <form action="" style="display: flex; justify-content: space-between;" id="form">
+      <label for="date">Fecha: 
         <input type="date" name="date" id="date">
       </label>
 
-      <label for="area">Seleccione el área: 
+      <label for="area">Área: 
         <select name="area" id="area">
           <option value="">Selecciona una opción</option>
           <option value="Hombres">Hombres</option>
           <option value="Mujeres">Mujeres</option>
           <option value="Enfermería">Enfermería</option>
           <option value="Platanera">Platanera</option>
+          <option value="Platanera/Enfermería">Platanera/Enfermería</option>
         </select>
       </label>
       
 
-      <label for="motivo">Motivo del turno: 
-        <input type="text" name="motivo" id="motivo">
+      <label for="reason">Motivo del turno: 
+        <input type="text" name="reason" id="reason">
       </label>
 
       <div>
-        <button type="button" onclick="agregarDatos()">Agregar</button>
+        <button type="button" onclick="addData()">Agregar</button>
         <button type="reset">Borrar</button>
       </div>
     </form>
+    <p>Valor día . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . <span id="dayValue" style="background-color: springgreen;"></span> $</p>
   </header>
   <br>
   <br>
   <main>
-    <table style="width: 100%;">
+    <table>
       <thead>
         <tr>
           <th>No.</th>
           <th>Fecha</th>
           <th>Área</th>
-          <th>Motivo</th>
+          <th>Motivo del turno</th>
+          <th style="background-color: springgreen;">Valor Día</th>
         </tr>
       </thead>
-      <tbody id="cuerpoTabla">
+      <tbody id="bodyTable">
 
       </tbody>
     </table>
+
+    <p>Total . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . <span id="totalValue"></span> $</p>
   </main>
   <script>
-    var numero = 0;
 
-    function agregarDatos() {
+    var number = 0;
+
+    var dayValue = 45.26675;
+    var spanDayValue = document.getElementById("dayValue");
+    spanDayValue.innerHTML = dayValue;
+
+    var suma = 0;
+
+    var totalValue = document.getElementById("totalValue");
+
+    function addData() {
+
       // Capturando los valores ingresados en el formulario.
 
-      numero++;
-      var fecha = document.getElementById("date").value;
+      number++;
+      suma = suma + dayValue;
+      var date = document.getElementById("date").value;
       var area = document.getElementById("area").value;
-      var motivo = document.getElementById("motivo").value;
+      var reason = document.getElementById("reason").value;
 
-      // Crear una nueva fila en la tabla
+      if (date.trim()==="" || area.trim()==="") {
+        alert("Necesita llenar algunos campos.");
+      } else {
+        // Crear una nueva fila en la tabla
 
-      var tabla = document.getElementById("cuerpoTabla");
-      var fila = tabla.insertRow();
+        var table = document.getElementById("bodyTable");
+        var row = table.insertRow();
 
-      // Insertar celdas con los datos capturados en el formulario
+        // Insertar celdas con los datos capturados en el formulario
       
-      var celdaNumero = fila.insertCell(0);
-      var celdaFecha = fila.insertCell(1);
-      var celdaArea = fila.insertCell(2);
-      var celdaMotivo = fila.insertCell(3);
+        var cellNumber = row.insertCell(0);
+        var cellDate = row.insertCell(1);
+        var cellArea = row.insertCell(2);
+        var cellReason = row.insertCell(3);
+        var cellValue = row.insertCell(4)
 
-    // Asignar los valores capturados a las celdas de la fila
-    celdaNumero.innerHTML = numero;
-    celdaFecha.innerHTML = fecha;
-    celdaArea.innerHTML = area;
-    celdaMotivo.innerHTML = motivo;
+        // Asignar los valores capturados a las celdas de la fila
 
-    // Limpiar campos del formulario 
+        cellNumber.innerHTML = number;
+        cellDate.innerHTML = date;
+        cellArea.innerHTML = area;
+        cellReason.innerHTML = reason;
+        cellValue.innerHTML = dayValue;
+        totalValue.innerHTML = suma;
+      }
+      
+      // Limpiar campos del formulario 
 
-    document.getElementById("formulario").reset();
+      document.getElementById("form").reset();
     }
   </script>
 </body>
